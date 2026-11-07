@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="google" content="notranslate">
 <meta http-equiv="Content-Language" content="ru">
 <title>МЕДИКА ПЛЮС — многопрофильная клиника в Санкт-Петербурге</title>
@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
     font-family: 'Inter', sans-serif;
     background: #faf6f0;
@@ -18,6 +18,7 @@
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
+    -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   img { max-width: 100%; display: block; }
@@ -101,7 +102,6 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(107, 68, 35, 0.25);
   }
-  .placeholder-label strong[data-copy]:hover::before { opacity: 1; }
   .placeholder-label span {
     display: block;
     font-size: 12px;
@@ -126,6 +126,7 @@
     align-items: center;
     gap: 10px;
     animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: calc(100vw - 40px);
   }
   .copy-notification.hide { animation: slideOut 0.3s forwards; }
   @keyframes slideIn {
@@ -159,7 +160,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 30px;
+    gap: 20px;
   }
   .logo {
     font-size: 22px;
@@ -169,6 +170,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
   }
   .logo-icon {
     width: 36px; height: 36px;
@@ -191,13 +193,28 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: #6b4423; }
-  .nav-phone {
+  .nav-phone-desktop {
     color: #6b4423;
     font-weight: 700;
     font-size: 15px;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
-  .nav-phone i { margin-right: 6px; color: #c87856; }
+  .nav-phone-desktop i { color: #c87856; }
+  .nav-phone-mobile {
+    display: none;
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, #6b4423, #c87856);
+    color: white;
+    border-radius: 10px;
+    align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .nav-phone-mobile:active { transform: scale(0.92); }
   .burger {
     display: none;
     background: none;
@@ -205,7 +222,35 @@
     font-size: 22px;
     color: #6b4423;
     cursor: pointer;
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    align-items: center; justify-content: center;
+    transition: background 0.2s;
   }
+  .burger:hover { background: rgba(107, 68, 35, 0.08); }
+
+  /* ===== ПЛАВАЮЩАЯ КНОПКА CTA ===== */
+  .floating-cta {
+    display: none;
+    position: fixed;
+    bottom: 20px; left: 16px; right: 16px;
+    z-index: 99;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #6b4423, #8b5a34);
+    color: white;
+    border-radius: 14px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: 0 10px 30px rgba(107, 68, 35, 0.4);
+    align-items: center; justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: transform 0.2s;
+    padding-bottom: calc(14px + env(safe-area-inset-bottom));
+  }
+  .floating-cta:active { transform: scale(0.97); }
+  .floating-cta i { font-size: 16px; }
 
   /* ===== HERO ===== */
   .hero {
@@ -260,7 +305,7 @@
     50% { opacity: 0.5; }
   }
   .hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     color: #2a1810;
     margin-bottom: 16px;
     letter-spacing: -1px;
@@ -297,6 +342,7 @@
     align-items: center;
     gap: 10px;
     font-family: inherit;
+    text-decoration: none;
   }
   .btn-primary {
     background: #6b4423;
@@ -399,7 +445,7 @@
     color: #8b5a34;
   }
 
-  /* ===== СЕКЦИИ (СЖАТО) ===== */
+  /* ===== СЕКЦИИ ===== */
   section.sec { padding: 40px 0; }
   .sec-head { text-align: center; margin-bottom: 24px; }
   .sec-kicker {
@@ -412,7 +458,7 @@
     margin-bottom: 10px;
   }
   .sec-head h2 {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
     color: #2a1810;
     margin-bottom: 10px;
   }
@@ -424,7 +470,7 @@
     color: #5a4535;
     max-width: 600px;
     margin: 0 auto;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   /* ===== УСЛУГИ ===== */
@@ -561,7 +607,7 @@
     z-index: 2;
   }
   .about-text h2 {
-    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
     color: #2a1810;
     margin-bottom: 16px;
   }
@@ -597,6 +643,7 @@
   .about-feat i {
     color: #c87856;
     font-size: 15px;
+    flex-shrink: 0;
   }
 
   /* ===== КОМАНДА ===== */
@@ -738,6 +785,7 @@
     display: flex; align-items: center; justify-content: center;
     font-weight: 700;
     font-size: 13px;
+    flex-shrink: 0;
   }
   .review-author b {
     display: block;
@@ -805,6 +853,7 @@
     color: white;
     line-height: 1.5;
     transition: color 0.2s;
+    word-break: break-word;
   }
   .contact-item a:hover { color: #d4a574; }
   .contact-map {
@@ -854,10 +903,12 @@
     background: #faf6f0;
     border: 1px solid rgba(107, 68, 35, 0.15);
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 16px; /* важно: 16px чтобы iOS не зумил */
     font-family: inherit;
     color: #2a1810;
     transition: all 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
   }
   .form-group input:focus,
   .form-group textarea:focus,
@@ -873,6 +924,7 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b4423' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 14px center;
+    background-color: #faf6f0;
     padding-right: 40px;
   }
   .form-agree {
@@ -880,6 +932,7 @@
     color: #8b5a34;
     margin-top: 10px;
     text-align: center;
+    line-height: 1.5;
   }
 
   /* ===== FOOTER ===== */
@@ -908,6 +961,7 @@
     justify-content: center;
     gap: 12px;
     margin: 20px 0;
+    flex-wrap: wrap;
   }
   .footer-socials a {
     width: 38px; height: 38px;
@@ -929,6 +983,7 @@
     border-top: 1px solid rgba(212, 165, 116, 0.15);
     font-size: 12px;
     color: #8b5a34;
+    line-height: 1.6;
   }
 
   /* ===== ЛАЙТБОКС ===== */
@@ -940,7 +995,7 @@
     z-index: 1000;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 20px;
     backdrop-filter: blur(8px);
   }
   .lightbox.active { display: flex; }
@@ -972,10 +1027,13 @@
     cursor: pointer;
   }
 
-  /* ===== АДАПТИВ ===== */
+  /* =============================================================
+     АДАПТИВ: ПЛАНШЕТ (768-960px)
+     ============================================================= */
   @media (max-width: 960px) {
-    .nav-links, .nav-phone { display: none; }
-    .burger { display: block; }
+    .nav-links, .nav-phone-desktop { display: none; }
+    .nav-phone-mobile { display: flex; }
+    .burger { display: flex; }
     .nav-links.open {
       display: flex;
       position: absolute;
@@ -984,46 +1042,203 @@
       backdrop-filter: blur(16px);
       flex-direction: column;
       padding: 20px;
-      gap: 16px;
+      gap: 4px;
       border-bottom: 1px solid rgba(107, 68, 35, 0.1);
+      box-shadow: 0 10px 30px rgba(107, 68, 35, 0.1);
+      animation: menuSlideDown 0.3s ease-out;
+    }
+    .nav-links.open li a {
+      display: block;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    .nav-links.open li a:hover {
+      background: rgba(107, 68, 35, 0.08);
+    }
+    @keyframes menuSlideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .hero { padding: 95px 0 30px; }
-    .hero-inner { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+    .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+    .hero-inner > div:first-child { order: 1; text-align: center; }
+    .hero-inner > .hero-photo { order: 2; max-width: 420px; margin: 0 auto; max-height: 520px; }
     .hero-badge { margin: 0 auto 16px; }
     .hero-sub { margin: 0 auto 20px; }
     .hero-actions { justify-content: center; margin-bottom: 24px; }
-    .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .hero-photo { max-width: 400px; margin: 0 auto; max-height: 500px; }
-    .adv-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 500px; margin: 0 auto; }
+    .adv-grid { grid-template-columns: repeat(3, 1fr); }
     .services-grid { grid-template-columns: 1fr 1fr; }
     .about-grid { grid-template-columns: 1fr; gap: 24px; }
-    .about-photo { max-width: 400px; margin: 0 auto; }
+    .about-photo { max-width: 420px; margin: 0 auto; order: 2; }
+    .about-text { order: 1; text-align: center; }
+    .about-feats { max-width: 420px; margin: 18px auto 0; }
     .team-grid { grid-template-columns: 1fr 1fr; }
     .interior-grid { grid-template-columns: 1fr 1fr; }
-    .reviews-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
     .contacts-grid { grid-template-columns: 1fr; gap: 20px; }
   }
 
+  /* =============================================================
+     АДАПТИВ: БОЛЬШОЙ СМАРТФОН (640px)
+     ============================================================= */
   @media (max-width: 640px) {
     section.sec { padding: 32px 0; }
+    .container { padding: 0 16px; }
+    .nav-inner { padding: 12px 16px; gap: 10px; }
+    .logo { font-size: 18px; }
+    .logo-icon { width: 32px; height: 32px; font-size: 16px; }
+    .burger { width: 36px; height: 36px; font-size: 20px; }
+    .nav-phone-mobile { width: 38px; height: 38px; font-size: 15px; }
+    .hero { padding: 85px 0 24px; }
+    .hero h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+    .hero-sub { font-size: 15px; }
     .hero-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .hero-actions { flex-direction: column; width: 100%; }
+    .stat-num { font-size: 26px; }
+    .stat-label { font-size: 11px; }
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+    }
     .hero-actions .btn { width: 100%; justify-content: center; }
-    .adv-grid { grid-template-columns: 1fr; }
+    .adv-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .adv-card { padding: 16px 10px; }
+    .adv-icon { width: 44px; height: 44px; font-size: 18px; margin-bottom: 8px; }
+    .adv-card h3 { font-size: 13px; }
+    .adv-card p { font-size: 12px; }
     .services-grid { grid-template-columns: 1fr; }
-    .team-grid { grid-template-columns: 1fr; }
-    .interior-grid { grid-template-columns: 1fr 1fr; }
+    .service-card { padding: 20px; }
+    .team-grid { grid-template-columns: 1fr; max-width: 340px; margin: 0 auto; }
+    .interior-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .about-feats { grid-template-columns: 1fr; }
-    .price-row { grid-template-columns: 1fr; gap: 6px; }
-    .price-value { justify-self: start; }
-    .contact-info-card, .contact-form { padding: 20px; }
-    .placeholder-label { padding: 12px; max-width: 92%; }
-    .placeholder-label strong[data-copy] { font-size: 11px; padding: 6px 10px; }
+    .about-feat { font-size: 13px; padding: 10px 12px; }
+
+    /* ПРАЙС: карточный вид на мобильных */
+    .price-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+      padding: 14px 18px;
+    }
+    .price-value {
+      justify-self: start;
+      font-size: 18px;
+    }
+    .price-row.featured { border-left-width: 3px; }
+
+    .contact-info-card, .contact-form { padding: 20px 18px; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 12px;
+      font-size: 16px;
+    }
+
+    /* Placeholder: компактный размер */
+    .placeholder-label {
+      padding: 12px;
+      max-width: 92%;
+    }
+    .placeholder-label strong[data-copy] {
+      font-size: 11px;
+      padding: 6px 10px;
+      margin-bottom: 6px;
+    }
     .placeholder-label span { font-size: 10px; }
+    .placeholder-label::before { font-size: 9px; margin-bottom: 6px; }
+
     .copy-notification {
-      bottom: 15px; right: 15px; left: 15px;
+      bottom: 90px; /* выше плавающей кнопки */
+      right: 16px; left: 16px;
       max-width: none;
       font-size: 13px;
+      justify-content: center;
+    }
+
+    /* Показываем плавающую кнопку */
+    .floating-cta { display: flex; }
+    body { padding-bottom: 80px; }
+    footer { padding-bottom: 100px; }
+
+    .lightbox { padding: 16px; }
+    .lightbox-close { top: -40px; font-size: 28px; }
+  }
+
+  /* =============================================================
+     АДАПТИВ: МАЛЕНЬКИЙ СМАРТФОН (480px и меньше — iPhone SE)
+     ============================================================= */
+  @media (max-width: 480px) {
+    .hero { padding: 80px 0 20px; }
+    .hero h1 { font-size: clamp(1.6rem, 7.5vw, 2.2rem); }
+    .hero-badge { font-size: 11px; padding: 5px 11px; }
+    .hero-sub { font-size: 14px; margin-bottom: 16px; }
+    .hero-photo { max-height: 420px; aspect-ratio: 4/5; }
+    .hero-stats { gap: 8px; padding-top: 18px; }
+    .stat-num { font-size: 22px; }
+    .stat-label { font-size: 10px; }
+    .adv-grid { grid-template-columns: 1fr; }
+    .adv-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+      padding: 14px 16px;
+    }
+    .adv-icon { margin: 0; flex-shrink: 0; }
+    .adv-card h3 { font-size: 14px; margin-bottom: 2px; }
+    .adv-card p { font-size: 12px; }
+    .sec-head h2 { font-size: clamp(1.4rem, 6.5vw, 1.8rem); }
+    .sec-head p { font-size: 14px; }
+    .sec-kicker { font-size: 11px; }
+    .service-card h3 { font-size: 16px; }
+    .service-card p { font-size: 13px; }
+    .team-info { padding: 14px; }
+    .team-info h3 { font-size: 15px; }
+    .team-role { font-size: 11px; }
+    .team-exp { font-size: 11px; }
+    .interior-caption { font-size: 11px; padding: 8px; }
+    .review-card { padding: 18px; }
+    .review-card p { font-size: 13px; }
+    .review-stars { font-size: 13px; }
+    .floating-cta { padding: 12px 16px; font-size: 14px; }
+    .contact-info-card h3, .contact-form h3 { font-size: 17px; }
+    .contact-item i { width: 34px; height: 34px; font-size: 14px; }
+    .contact-item span, .contact-item a { font-size: 13px; }
+    .contact-map { height: 150px; }
+    footer { padding-bottom: 90px; }
+    .footer-logo { font-size: 18px; }
+  }
+
+  /* =============================================================
+     АДАПТИВ: ОЧЕНЬ МАЛЕНЬКИЙ (360px)
+     ============================================================= */
+  @media (max-width: 360px) {
+    .hero-inner { padding: 0 12px; }
+    .container { padding: 0 12px; }
+    .nav-inner { padding: 10px 12px; }
+    .logo span { display: none; }
+    .hero h1 { font-size: 1.5rem; }
+    .hero-stats { grid-template-columns: 1fr; gap: 6px; }
+    .stat-num { font-size: 20px; text-align: center; }
+    .stat-label { text-align: center; }
+    .adv-card { padding: 12px; }
+    .interior-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Отключение hover-эффектов на тач-устройствах */
+  @media (hover: none) {
+    .service-card:hover,
+    .team-card:hover,
+    .review-card:hover,
+    .adv-card:hover {
+      transform: none;
+    }
+    .btn-primary:hover, .btn-ghost:hover {
+      transform: none;
     }
   }
 </style>
@@ -1038,7 +1253,10 @@
       <div class="logo-icon"><i class="fas fa-plus"></i></div>
       МЕДИКА<span>ПЛЮС</span>
     </a>
-    <button class="burger" id="burger"><i class="fas fa-bars"></i></button>
+    <a href="tel:+78121234567" class="nav-phone-mobile" aria-label="Позвонить">
+      <i class="fas fa-phone"></i>
+    </a>
+    <button class="burger" id="burger" aria-label="Меню"><i class="fas fa-bars"></i></button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#services">Услуги</a></li>
       <li><a href="#prices">Цены</a></li>
@@ -1047,7 +1265,7 @@
       <li><a href="#reviews">Отзывы</a></li>
       <li><a href="#contact">Контакты</a></li>
     </ul>
-    <a href="tel:+78121234567" class="nav-phone">
+    <a href="tel:+78121234567" class="nav-phone-desktop">
       <i class="fas fa-phone"></i> +7 (812) 123-45-67
     </a>
   </div>
@@ -1101,28 +1319,38 @@
     <div class="adv-grid">
       <div class="adv-card">
         <div class="adv-icon"><i class="fas fa-user-md"></i></div>
-        <h3>Опытные врачи</h3>
-        <p>Стаж от 10 лет</p>
+        <div>
+          <h3>Опытные врачи</h3>
+          <p>Стаж от 10 лет</p>
+        </div>
       </div>
       <div class="adv-card">
         <div class="adv-icon"><i class="fas fa-microscope"></i></div>
-        <h3>Современное оборудование</h3>
-        <p>Экспертный класс</p>
+        <div>
+          <h3>Современное оборудование</h3>
+          <p>Экспертный класс</p>
+        </div>
       </div>
       <div class="adv-card">
         <div class="adv-icon"><i class="fas fa-clock"></i></div>
-        <h3>Без очередей</h3>
-        <p>Запись на удобное время</p>
+        <div>
+          <h3>Без очередей</h3>
+          <p>Запись на удобное время</p>
+        </div>
       </div>
       <div class="adv-card">
         <div class="adv-icon"><i class="fas fa-shield-alt"></i></div>
-        <h3>Гарантия качества</h3>
-        <p>Контроль на каждом этапе</p>
+        <div>
+          <h3>Гарантия качества</h3>
+          <p>Контроль на каждом этапе</p>
+        </div>
       </div>
       <div class="adv-card">
         <div class="adv-icon"><i class="fas fa-hand-holding-usd"></i></div>
-        <h3>Честные цены</h3>
-        <p>Без скрытых доплат</p>
+        <div>
+          <h3>Честные цены</h3>
+          <p>Без скрытых доплат</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1469,7 +1697,7 @@
           </div>
         </div>
         <div class="contact-map">
-          <iframe src="https://yandex.ru/map-widget/v1/?ll=30.360901%2C59.931280&z=16" allowfullscreen></iframe>
+          <iframe src="https://yandex.ru/map-widget/v1/?ll=30.360901%2C59.931280&z=16" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
 
@@ -1482,7 +1710,7 @@
         </div>
         <div class="form-group">
           <label>Телефон</label>
-          <input type="tel" id="phone" required placeholder="+7 (___) ___-__-__">
+          <input type="tel" id="phone" required placeholder="+7 (___) ___-__-__" inputmode="tel">
         </div>
         <div class="form-group">
           <label>Услуга</label>
@@ -1530,6 +1758,12 @@
   </div>
 </footer>
 
+<!-- ПЛАВАЮЩАЯ КНОПКА CTA (видна на мобильных) -->
+<a href="#contact" class="floating-cta">
+  <i class="fas fa-calendar-check"></i>
+  <span>Записаться на приём</span>
+</a>
+
 <div class="lightbox" id="lightbox">
   <div class="lightbox-content">
     <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
@@ -1575,14 +1809,13 @@
     e.target.value = formatted;
   });
 
-  // ===== КОПИРОВАНИЕ: в буфер попадает только имя файла (без images/) =====
   document.addEventListener('click', (e) => {
     const copyTarget = e.target.closest('[data-copy]');
     if (copyTarget) {
       e.stopPropagation();
-      const fullPath = copyTarget.dataset.copy;        // например: "images/hero.jpg"
-      const justName = fullPath.split('/').pop();       // "hero.jpg" — только имя
-      copyToClipboard(justName);                        // копируем ТОЛЬКО имя файла
+      const fullPath = copyTarget.dataset.copy;
+      const justName = fullPath.split('/').pop();
+      copyToClipboard(justName);
     }
   });
 
