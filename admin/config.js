@@ -11,7 +11,7 @@ const CMS_CONFIG = {
     // Владелец и имя репозитория, где лежит сайт.
     // Берётся из URL: github.com/ВЛАДЕЛЕЦ/РЕПОЗИТОРИЙ
     owner: 'piarbookru-hub',
-    repo: 'piarbook',
+    repo: 'MED-KLINIK',
 
     // Ветка, в которой лежит сайт (обычно main).
     branch: 'main',
